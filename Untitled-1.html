@@ -1,0 +1,179 @@
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Manrope%3Awght%40400%3B500%3B700%3B800&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
+    />
+    <title>Jony Murillo</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <style>
+      body {
+        background-color: black; /* Fondo de la página en negro */
+      }
+      .content-container {
+        background-color: white; /* Color del recuadro */
+        border-radius: 15px; /* Bordes redondeados */
+        padding: 10px; /* Espaciado interno */
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra del recuadro */
+        height: 100vh; /* Ocupa toda la altura visible de la pantalla */
+        max-height: 100vh; /* Limita la altura para que no crezca más allá de la pantalla */
+        overflow-y: auto; /* Permite scroll dentro del contenedor si el contenido es muy grande */
+      }
+
+      .active {
+        background-color: black;
+        color: white;
+      }
+      .inactive {
+        background-color: #e2e8f0; /* Color gris claro cuando no está seleccionado */
+        color: black;
+      }
+
+      .proyecto-container {
+        display: flex;
+        justify-content: space-between; /* Distribuye los proyectos equitativamente */
+        flex-wrap: wrap; /* Permite que los elementos se envuelvan si no caben en una línea */
+      }
+
+      .proyecto {
+        flex-grow: 1;
+        max-width: 30%; /* Ajusta el tamaño máximo de cada proyecto */
+        margin: 10px; /* Añade un pequeño margen entre los proyectos */
+      }
+
+      .proyecto img {
+        width: 100%; /* Hace que las imágenes ocupen todo el ancho del contenedor */
+        height: auto;
+      }
+    </style>
+    <script>
+      function mostrarProyectos(categoria) {
+        // Ocultar todos los contenedores de proyectos
+        document.querySelectorAll('.proyecto-container').forEach(function(el) {
+          el.style.display = 'none';
+        });
+
+        // Mostrar solo el contenedor de la categoría seleccionada
+        document.querySelectorAll('.' + categoria + '-container').forEach(function(el) {
+          el.style.display = 'flex';
+        });
+
+        // Resetear el estilo activo de todos los botones
+        document.querySelectorAll('.categoria-btn').forEach(function(btn) {
+          btn.classList.remove('active');
+          btn.classList.add('inactive');
+        });
+
+        // Activar el botón seleccionado
+        document.getElementById(categoria + '-btn').classList.remove('inactive');
+        document.getElementById(categoria + '-btn').classList.add('active');
+      }
+    </script>
+  </head>
+  <body>
+    <div class="relative flex size-full min-h-screen flex-col overflow-x-hidden" style='font-family: Manrope, "Noto Sans", sans-serif;'>
+      <div class="layout-container flex h-full grow flex-col content-container mx-5 my-5">
+        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#F4F4F4] px-10 py-3">
+          <div class="flex items-center gap-4 text-[#141414]">
+            <div class="size-4">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_6_535)">
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M47.2426 24L24 47.2426L0.757355 24L24 0.757355L47.2426 24ZM12.2426 21H35.7574L24 9.24264L12.2426 21Z"
+                    fill="currentColor"
+                  ></path>
+                </g>
+                <defs>
+                  <clipPath id="clip0_6_535">
+                    <rect width="48" height="48" fill="white"></rect>
+                  </clipPath>
+                </defs>
+              </svg>
+            </div>
+            <h2 class="text-[#141414] text-lg font-bold leading-tight tracking-[-0.015em]">Portafolio</h2>
+          </div>
+        </header>
+
+        <div class="px-40 flex flex-1 justify-center py-5">
+          <div class="layout-content-container flex flex-col max-w-full flex-1">
+            <div class="flex p-4">
+              <div class="flex w-full flex-col gap-4 items-center">
+                <div class="bg-blue-800 rounded-lg p-3 flex flex-col items-center">
+                  <div
+                    class="bg-center bg-no-repeat aspect-square bg-cover rounded-full min-h-32 w-32"
+                    style='background-image: url("me.jpg");'
+                  ></div>
+                  <div class="flex flex-col items-center text-white mt-4">
+                    <p class="text-[20px] font-bold text-center">Jonatan Murillo Mateo</p>
+                    <p class="text-base">Desarrollador web</p>
+                  </div>
+                  <button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 bg-[#F4F4F4] text-[#141414] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5">
+                    <img src="python.webp" alt="Python" class="h-6">
+                    <img src="flask.webp" alt="Flask" class="h-6">
+                    <img src="html.png" alt="HTML" class="h-6">
+                    <img src="css.png" alt="CSS" class="h-6">
+                    <img src="js.webp" alt="JS" class="h-6">
+                  </button>
+                </div>
+
+                <!-- Botones de categorías -->
+                <div class="flex gap-4 mt-4">
+                  <button id="aplicacion-web-btn" class="categoria-btn active px-4 py-2 rounded" onclick="mostrarProyectos('aplicacion-web')">Aplicaciones Web</button>
+                  <button id="web-btn" class="categoria-btn inactive px-4 py-2 rounded" onclick="mostrarProyectos('web')">Web</button>
+                  <!--<button id="app-btn" class="categoria-btn inactive px-4 py-2 rounded" onclick="mostrarProyectos('app')">Apps</button>-->
+                </div>
+
+                <!-- Proyectos Aplicaciones Web (Visible por defecto) -->
+                <div class="proyecto-container aplicacion-web-container">
+                  <div class="proyecto aplicacion-web">
+                    <img src="gestionvehiculos.JPG" alt="Proyecto Gestión Vehículos" class="rounded-lg shadow-lg w-full h-auto">
+                    <p class="text-center mt-2">Gestión Vehículos</p>
+                  </div>
+                  <div class="proyecto aplicacion-web">
+                    <img src="datafactory.JPG" alt="datafactory" class="rounded-lg shadow-lg w-full h-auto">
+                    <p class="text-center mt-2">Procesado de ficheros</p>
+                  </div>
+                  <div class="proyecto aplicacion-web">
+                    <img src="ftp_transfer.JPG" alt="ftp_transfer" class="rounded-lg shadow-lg w-full h-auto">
+                    <p class="text-center mt-2">Conexiones ftp</p>
+                  </div>
+                </div>
+
+                <!-- Proyectos Web (Oculto por defecto) -->
+                <div class="proyecto-container web-container" style="display: none;">
+                  <div class="proyecto web">
+                    <img src="alditraexweb.JPG" alt="alditraexweb" class="rounded-lg shadow-lg w-full h-auto">
+                    <p class="text-center mt-2">Web transporte</p>
+                  </div>
+                  <div class="proyecto web">
+                    <img src="jomma.JPG" alt="JoomA" class="rounded-lg shadow-lg w-full h-auto">
+                    <p class="text-center mt-2">Web JommA</p>
+                  </div>
+                  <div class="proyecto web">
+                    <img src="pasteleriaweb.JPG" alt="pasteleriawebweb" class="rounded-lg shadow-lg w-full h-auto">
+                    <p class="text-center mt-2">Web pastelería</p>
+                  </div>
+                </div>
+
+                <!-- Apps (Oculto por defecto) -->
+                <div class="proyecto-container app-container" style="display: none;">
+                  <div class="proyecto app">
+                    <img src="app-proyecto.jpg" alt="Proyecto App" class="rounded-lg shadow-lg w-full h-auto">
+                    <p class="text-center mt-2">Aplicación Móvil XYZ</p>
+                  </div>
+                </div>
+
+              </div> <!-- Cierra el contenedor de proyectos -->
+            </div> <!-- Cierra el flex principal -->
+          </div> <!-- Cierra el layout-content-container -->
+        </div> <!-- Cierra el contenedor px-40 -->
+      </div> <!-- Cierra el layout-container -->
+    </div> <!-- Cierra el contenedor principal -->
+  </body>
+</html>

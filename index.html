@@ -1,234 +1,184 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
-    <link
-      rel="stylesheet"
-      as="style"
-      onload="this.rel='stylesheet'"
-      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Manrope%3Awght%40400%3B500%3B700%3B800&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
-    />
-    <title>Jony Murillo</title>
-    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <style>
-      body {
-        background-color: black;
-      }
-      .content-container {
-        background-color: white;
-        border-radius: 15px;
-        padding: 10px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        overflow-y: auto;
-      }
-      .active {
-        background-color: black;
-        color: white;
-      }
-      .inactive {
-        background-color: #e2e8f0;
-        color: black;
-      }
-      .flip-card {
-        perspective: 1000px;
-        margin: 10px;
-      }
-      .flip-card-inner {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        text-align: center;
-        transition: transform 0.6s;
-        transform-style: preserve-3d;
-      }
-      .flip-card:hover .flip-card-inner {
-        transform: rotateY(180deg);
-      }
-      .flip-card-front, .flip-card-back {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        backface-visibility: hidden;
-        border-radius: 15px;
-      }
-      .flip-card-front {
-        background-color: #fff;
-        color: black;
-      }
-      .flip-card-back {
-        background-color: #141414;
-        color: white;
-        transform: rotateY(180deg);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
-      }
-    </style>
-    <script>
-      function mostrarProyectos(categoria) {
-        document.querySelectorAll('.proyecto-container').forEach(function (el) {
-          el.style.display = 'none';
-        });
-        document.querySelectorAll('.' + categoria + '-container').forEach(function (el) {
-          el.style.display = 'flex';
-        });
-        document.querySelectorAll('.categoria-btn').forEach(function (btn) {
-          btn.classList.remove('active');
-          btn.classList.add('inactive');
-        });
-        document.getElementById(categoria + '-btn').classList.remove('inactive');
-        document.getElementById(categoria + '-btn').classList.add('active');
-      }
-    </script>
-  </head>
-  <body>
-    <div class="relative flex min-h-screen flex-col overflow-x-hidden font-sans">
-      <div class="layout-container flex flex-col content-container mx-5 my-5 lg:mx-auto lg:my-10 lg:w-3/4">
-        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#F4F4F4] px-5 py-3 lg:px-10">
-          <div class="flex items-center gap-4 text-[#141414]">
-            <div class="size-4">
-              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8">
-                <g clip-path="url(#clip0_6_535)">
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M47.2426 24L24 47.2426L0.757355 24L24 0.757355L47.2426 24ZM12.2426 21H35.7574L24 9.24264L12.2426 21Z"
-                    fill="currentColor"
-                  ></path>
-                </g>
-                <defs>
-                  <clipPath id="clip0_6_535">
-                    <rect width="48" height="48" fill="white"></rect>
-                  </clipPath>
-                </defs>
-              </svg>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+  <link rel="stylesheet" as="style" onload="this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Manrope%3Awght%40400%3B500%3B700%3B800&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900" />
+  <title>Jony Murillo</title>
+  <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <style>
+    body {
+      background-color: black;
+    }
+    .content-container {
+      background-color: white;
+      border-radius: 15px;
+      padding: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      overflow-y: auto;
+    }
+    .active {
+      background-color: black;
+      color: white;
+    }
+    .inactive {
+      background-color: #e2e8f0;
+      color: black;
+    }
+    /* Estilo para el efecto de giro */
+    .flip-card {
+      perspective: 1000px;
+    }
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+    .flip-card:hover .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+    .flip-card-front, .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 10px;
+    }
+    .flip-card-front {
+      background-color: #fff;
+    }
+    .flip-card-back {
+      background-color: #141414;
+      color: white;
+      transform: rotateY(180deg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+  </style>
+  <script>
+    function mostrarProyectos(categoria) {
+      document.querySelectorAll('.proyecto-container').forEach(function (el) {
+        el.style.display = 'none';
+      });
+      document.querySelectorAll('.' + categoria + '-container').forEach(function (el) {
+        el.style.display = 'flex';
+      });
+      document.querySelectorAll('.categoria-btn').forEach(function (btn) {
+        btn.classList.remove('active');
+        btn.classList.add('inactive');
+      });
+      document.getElementById(categoria + '-btn').classList.remove('inactive');
+      document.getElementById(categoria + '-btn').classList.add('active');
+    }
+  </script>
+</head>
+<body>
+  <div class="relative flex min-h-screen flex-col overflow-x-hidden font-sans">
+    <div class="layout-container flex flex-col content-container mx-5 my-5 lg:mx-auto lg:my-10 lg:w-3/4">
+      <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#F4F4F4] px-5 py-3 lg:px-10">
+        <h2 class="text-[#141414] text-lg font-bold">Portafolio</h2>
+      </header>
+
+      <div class="px-5 lg:px-20 flex flex-1 justify-center py-5">
+        <div class="layout-content-container flex flex-col w-full lg:max-w-full lg:flex-1">
+          <div class="flex p-4 flex-col items-center">
+            <div class="bg-blue-800 rounded-lg p-3 flex flex-col items-center w-full sm:max-w-md lg:w-auto">
+              <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full min-h-32 w-32" style="background-image: url('me.jpg');"></div>
+              <div class="flex flex-col items-center text-white mt-4 text-center">
+                <p class="text-[20px] font-bold">Jonatan Murillo Mateo</p>
+                <p class="text-base">Desarrollador web</p>
+              </div>
             </div>
-            <h2 class="text-[#141414] text-lg font-bold leading-tight tracking-[-0.015em]">Portafolio</h2>
-          </div>
-        </header>
 
-        <div class="px-5 lg:px-20 flex flex-1 justify-center py-5">
-          <div class="layout-content-container flex flex-col w-full lg:max-w-full lg:flex-1">
-            <div class="flex p-4 flex-col items-center">
-              <div class="bg-blue-800 rounded-lg p-3 flex flex-col items-center w-full sm:max-w-md lg:w-auto">
-                <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full min-h-32 w-32" style="background-image: url('me.jpg');"></div>
-                <div class="flex flex-col items-center text-white mt-4 text-center">
-                  <p class="text-[20px] font-bold">Jonatan Murillo Mateo</p>
-                  <p class="text-base">Desarrollador web</p>
-                </div>
-                <button class="flex max-w-full cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 bg-[#F4F4F4] text-[#141414] gap-2 text-sm font-bold px-2.5 mt-4">
-                  <img src="python.webp" alt="Python" class="h-6">
-                  <img src="flask.webp" alt="Flask" class="h-6">
-                  <img src="html.png" alt="HTML" class="h-6">
-                  <img src="css.png" alt="CSS" class="h-6">
-                  <img src="js.webp" alt="JS" class="h-6">
-                </button>
-              </div>
+            <!-- Botones de categorías -->
+            <div class="flex gap-4 mt-4 flex-wrap justify-center">
+              <button id="aplicacion-web-btn" class="categoria-btn active px-4 py-2 rounded" onclick="mostrarProyectos('aplicacion-web')">Aplicaciones Web</button>
+              <button id="web-btn" class="categoria-btn inactive px-4 py-2 rounded" onclick="mostrarProyectos('web')">Web</button>
+            </div>
 
-              <!-- Botones de categorías -->
-              <div class="flex gap-4 mt-4 flex-wrap justify-center">
-                <button id="aplicacion-web-btn" class="categoria-btn active px-4 py-2 rounded" onclick="mostrarProyectos('aplicacion-web')">Aplicaciones Web</button>
-                <button id="web-btn" class="categoria-btn inactive px-4 py-2 rounded" onclick="mostrarProyectos('web')">Web</button>
-              </div>
-
-              <!-- Proyectos Aplicaciones Web (Visible por defecto) -->
-              <div class="proyecto-container aplicacion-web-container flex flex-wrap justify-center mt-5">
-                <div class="flip-card w-full sm:w-1/2 lg:w-1/3 p-2">
-                  <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                      <img src="gestionvehiculos.JPG" alt="Proyecto Gestión Vehículos" class="rounded-lg shadow-lg w-full h-auto">
-                      <p class="text-center mt-2 font-bold">Gestión Vehículos</p>
-                    </div>
-                    <div class="flip-card-back">
-                      <p>Aplicación para la gestión y mantenimiento de flotas de vehículos.</p>
-                    </div>
+            <!-- Proyectos Aplicaciones Web con efecto de giro -->
+            <div class="proyecto-container aplicacion-web-container flex flex-wrap justify-center mt-5">
+              <div class="flip-card w-full sm:w-1/2 lg:w-1/3 p-2">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <img src="gestionvehiculos.JPG" alt="Proyecto Gestión Vehículos" class="rounded-lg shadow-lg w-full h-auto">
+                    <p class="text-center mt-2 font-bold">Gestión Vehículos</p>
                   </div>
-                </div>
-                <div class="flip-card w-full sm:w-1/2 lg:w-1/3 p-2">
-                  <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                      <img src="webcitas.png" alt="App reserva citas" class="rounded-lg shadow-lg w-full h-auto">
-                      <p class="text-center mt-2 font-bold">App Reserva Citas</p>
-                    </div>
-                    <div class="flip-card-back">
-                      <p>Aplicación para la reserva de citas en una peluquería con interfaz intuitiva.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="flip-card w-full sm:w-1/2 lg:w-1/3 p-2">
-                  <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                      <img src="ftp_transfer.JPG" alt="Conexiones FTP" class="rounded-lg shadow-lg w-full h-auto">
-                      <p class="text-center mt-2 font-bold">Conexiones FTP</p>
-                    </div>
-                    <div class="flip-card-back">
-                      <p>Aplicación para gestionar transferencias seguras mediante conexiones FTP.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="flip-card w-full sm:w-1/2 lg:w-1/3 p-2">
-                  <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                      <img src="datafactory.JPG" alt="Procesado de Ficheros" class rounded-lg shadow-lg w-full h-auto">
-                      <p class="text-center mt-2 font-bold">Procesado de Ficheros</p>
-                    </div>
-                    <div class="flip-card-back">
-                      <p>Aplicación para el procesamiento de ficheros y datos a gran escala.</p>
-                    </div>
+                  <div class="flip-card-back">
+                    <p>Aplicación para gestionar y mantener flotas de vehículos.</p>
                   </div>
                 </div>
               </div>
 
-              <!-- Proyectos Web (Oculto por defecto) -->
-              <div class="proyecto-container web-container flex flex-wrap justify-center mt-5 hidden">
-                <div class="flip-card w-full sm:w-1/2 lg:w-1/3 p-2">
-                  <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                      <a href="https://jmm-1987.github.io/webalditraex/" target="_blank">
-                        <img src="alditraexweb.JPG" alt="Web Transporte" class="rounded-lg shadow-lg w-full h-auto">
-                        <p class="text-center mt-2 font-bold">Web Transporte</p>
-                      </a>
-                    </div>
-                    <div class="flip-card-back">
-                      <p>Web para la empresa de transporte Alditraex, mostrando servicios y contacto.</p>
-                    </div>
+              <div class="flip-card w-full sm:w-1/2 lg:w-1/3 p-2">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <img src="webcitas.png" alt="App Reserva Citas" class="rounded-lg shadow-lg w-full h-auto">
+                    <p class="text-center mt-2 font-bold">App Reserva Citas</p>
+                  </div>
+                  <div class="flip-card-back">
+                    <p>Aplicación para reservar citas en una peluquería.</p>
                   </div>
                 </div>
-                <div class="flip-card w-full sm:w-1/2 lg:w-1/3 p-2">
-                  <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                      <a href="https://jmm-1987.github.io/jmurillodev/" target="_blank">
-                        <img src="jomma.JPG" alt="Web JommA" class="rounded-lg shadow-lg w-full h-auto">
-                        <p class="text-center mt-2 font-bold">Web JommA</p>
-                      </a>
-                    </div>
-                    <div class="flip-card-back">
-                      <p>Portafolio profesional mostrando proyectos y experiencia de JommA.</p>
-                    </div>
+              </div>
+
+              <div class="flip-card w-full sm:w-1/2 lg:w-1/3 p-2">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <img src="ftp_transfer.JPG" alt="Conexiones FTP" class="rounded-lg shadow-lg w-full h-auto">
+                    <p class="text-center mt-2 font-bold">Conexiones FTP</p>
+                  </div>
+                  <div class="flip-card-back">
+                    <p>Gestión segura de transferencias mediante conexiones FTP.</p>
                   </div>
                 </div>
-                <div class="flip-card w-full sm:w-1/2 lg:w-1/3 p-2">
-                  <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                      <a href="https://jmm-1987.github.io/pasteleria/" target="_blank">
-                        <img src="pasteleriaweb.JPG" alt="Web Pastelería" class="rounded-lg shadow-lg w-full h-auto">
-                        <p class="text-center mt-2 font-bold">Web Pastelería</p>
-                      </a>
-                    </div>
-                    <div class="flip-card-back">
-                      <p>Sitio web para una pastelería local, mostrando productos y servicios.</p>
-                    </div>
+              </div>
+
+              <div class="flip-card w-full sm:w-1/2 lg:w-1/3 p-2">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <img src="datafactory.JPG" alt="Procesado de Ficheros" class="rounded-lg shadow-lg w-full h-auto">
+                    <p class="text-center mt-2 font-bold">Procesado de Ficheros</p>
+                  </div>
+                  <div class="flip-card-back">
+                    <p>Procesamiento a gran escala de ficheros y datos.</p>
                   </div>
                 </div>
+              </div>
+            </div>
+
+            <!-- Proyectos Web (sin efecto de giro) -->
+            <div class="proyecto-container web-container flex flex-wrap justify-center mt-5 hidden">
+              <div class="proyecto web w-full sm:w-1/2 lg:w-1/3 p-2">
+                <a href="https://jmm-1987.github.io/webalditraex/" target="_blank">
+                  <img src="alditraexweb.JPG" alt="Web Transporte" class="rounded-lg shadow-lg w-full h-auto">
+                  <p class="text-center mt-2 font-bold">Web Transporte</p>
+                </a>
+              </div>
+              <div class="proyecto web w-full sm:w-1/2 lg:w-1/3 p-2">
+                <a href="https://jmm-1987.github.io/jmurillodev/" target="_blank">
+                  <img src="jomma.JPG" alt="Web JommA" class="rounded-lg shadow-lg w-full h-auto">
+                  <p class="text-center mt-2 font-bold">Web JommA</p>
+                </a>
+              </div>
+              <div class="proyecto web w-full sm:w-1/2 lg:w-1/3 p-2">
+                <a href="https://jmm-1987.github.io/pasteleria/" target="_blank">
+                  <img src="pasteleriaweb.JPG" alt="Web Pastelería" class="rounded-lg shadow-lg w-full h-auto">
+                  <p class-center mt-2 font-bold">Web Pastelería</p>
+                </a>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </body>
+  </div>
+</body>
 </html>
